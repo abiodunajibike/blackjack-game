@@ -27,7 +27,6 @@ class BlackJack(object):
         '''
         Select a card from the top of deck of cards
         '''
-        self.shuffle_deck()
         return self.deck.pop()
         
     def deal_cards(self, hand, num_of_cards):
@@ -47,6 +46,9 @@ class BlackJack(object):
             """
         )
         print(f'len of deck: {len(self.deck)}')
+
+        # shuffle deck of cards
+        self.shuffle_deck()
 
         # deal cards to player
         self.deal_cards(self.player_hand, 2)
