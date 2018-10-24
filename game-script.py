@@ -7,7 +7,7 @@ class BlackJack(object):
     '''
     def __init__(self):
         # deck of 52 cards
-        self.deck = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 10, 'J', 'Q', 'K']*4 
+        self.deck = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 'T', 'J', 'Q', 'K']*4
         self.player_hand = []
         self.dealer_hand = []
 
@@ -36,7 +36,6 @@ class BlackJack(object):
         '''
         for i in range(2):
             hand.append(self.select_card())
-            
 
     def play_game(self):
         print(
