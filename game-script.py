@@ -11,11 +11,11 @@ class BlackJack(object):
         self.player_hand = []
         self.dealer_hand = []
 
-    def get_user_input(prompt):
+    def get_user_input(self, prompt):
         '''
         Display prompt message and return user input
         '''
-        return input(prompt)
+        return input(prompt).lower()
 
     def shuffle_deck(self):
         '''
@@ -35,7 +35,35 @@ class BlackJack(object):
         '''
         for i in range(num_of_cards):
             hand.append(self.select_card())
-            print(f'len of deck: {len(self.deck)}')
+
+    def calculate_hand_total(self, hand):
+        hand_total = 0
+        for card in hand:
+            if card in ['T', 'J', 'Q', 'K']:
+                card = 10
+            elif card == 'A':
+                if hand_total > 11:
+                    card = 1
+                else:
+                    card = 11
+
+            hand_total += card
+        return hand_total
+
+    def evaluate_initial_hand_total(self):
+        '''
+        Evaluate player's initial hand total to see if it's exactly
+        21 for a blackjack.
+        '''
+        player_hand_total = self.calculate_hand_total(self.player_hand)
+
+        print (f'Your hand contains {self.player_hand} with a total of '
+               f'{player_hand_total}')
+
+        print(f'Dealer"s face up card is {self.dealer_hand[0]}')
+
+        if player_hand_total == 21:
+            print('Congratulations! You are the winner courtesy of your natural blackjack')
 
     def play_game(self):
         print(
@@ -45,18 +73,18 @@ class BlackJack(object):
             --------------------------------------
             """
         )
-        print(f'len of deck: {len(self.deck)}')
 
         # shuffle deck of cards
         self.shuffle_deck()
 
         # deal cards to player
         self.deal_cards(self.player_hand, 2)
-        print(f'self.player_hand: {self.player_hand}')
 
         # deal cards to dealer
         self.deal_cards(self.dealer_hand, 1)
-        print(f'self.dealer_hand: {self.dealer_hand}')
+
+        self.evaluate_initial_hand_total()
+
 
 if __name__ == "__main__":
     blackjack = BlackJack()
