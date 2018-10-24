@@ -30,11 +30,11 @@ class BlackJack(object):
         self.shuffle_deck()
         return self.deck.pop()
         
-    def deal_cards(self, hand):
+    def deal_cards(self, hand, num_of_cards):
         '''
-        Deal 2 cards to player/dealer
+        Deal card(s)
         '''
-        for i in range(2):
+        for i in range(num_of_cards):
             hand.append(self.select_card())
             print(f'len of deck: {len(self.deck)}')
 
@@ -49,11 +49,11 @@ class BlackJack(object):
         print(f'len of deck: {len(self.deck)}')
 
         # deal cards to player
-        self.deal_cards(self.player_hand)
+        self.deal_cards(self.player_hand, 2)
         print(f'self.player_hand: {self.player_hand}')
 
         # deal cards to dealer
-        self.deal_cards(self.dealer_hand)
+        self.deal_cards(self.dealer_hand, 1)
         print(f'self.dealer_hand: {self.dealer_hand}')
 
 if __name__ == "__main__":
