@@ -7,7 +7,7 @@ class BlackJack(object):
     '''
     def __init__(self):
         # deck of 52 cards
-        self.deck = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 'T', 'J', 'Q', 'K']*4
+        self.deck = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 'T', 'J', 'Q', 'K'] * 4
         self.player_hand = []
         self.dealer_hand = []
 
@@ -25,10 +25,10 @@ class BlackJack(object):
 
     def select_card(self):
         '''
-        Select a random card from deck of cards
+        Select a card from the top of deck of cards
         '''
         self.shuffle_deck()
-        return random.choice(self.deck)
+        return self.deck.pop()
         
     def deal_cards(self, hand):
         '''
@@ -36,6 +36,7 @@ class BlackJack(object):
         '''
         for i in range(2):
             hand.append(self.select_card())
+            print(f'len of deck: {len(self.deck)}')
 
     def play_game(self):
         print(
@@ -45,6 +46,7 @@ class BlackJack(object):
             --------------------------------------
             """
         )
+        print(f'len of deck: {len(self.deck)}')
 
         # deal cards to player
         self.deal_cards(self.player_hand)
@@ -52,8 +54,7 @@ class BlackJack(object):
 
         # deal cards to dealer
         self.deal_cards(self.dealer_hand)
-        print(f'self.player_hand: {self.dealer_hand}')
-
+        print(f'self.dealer_hand: {self.dealer_hand}')
 
 if __name__ == "__main__":
     blackjack = BlackJack()
