@@ -11,12 +11,6 @@ class BlackJack(object):
         self.player_hand = []
         self.dealer_hand = []
 
-    def get_user_input(self, prompt):
-        '''
-        Display prompt message and return user input
-        '''
-        return input(prompt).lower()
-
     def shuffle_deck(self):
         '''
         Shuffle deck of cards
@@ -83,8 +77,27 @@ class BlackJack(object):
         # deal cards to dealer
         self.deal_cards(self.dealer_hand, 1)
 
+        # evaluate initial cards to see if there is a winner
         self.evaluate_initial_hand_total()
 
+        game_choice = None
+        while game_choice != 'None':
+            game_choice = input(
+                'Type h to Hit, s to Stand or q to Quit and press Enter button: '
+            ).lower()
+            if game_choice == '':
+                continue
+
+            if game_choice in ['h', 's', 'q']:
+                if game_choice == 'h':
+                    print('Hit')
+                elif game_choice == 's':
+                    print('Stand')
+                else:
+                    print('Quit game')
+                    exit()
+            else:
+                print(f'The entered value: {game_choice} is not an acceptable value.')
 
 if __name__ == "__main__":
     blackjack = BlackJack()
