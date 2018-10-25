@@ -152,6 +152,11 @@ class BlackJack(object):
 
                 if game_choice == 'h':
                     self.hit(self.player_hand)
+                    player_total = self.calculate_hand_total(self.player_hand)
+                    if player_total > 21:
+                        print('You lose! Hand total exceeds 21.')
+                        exit()
+
                     # dealer must hit on 16 and lower cards
                     while self.calculate_hand_total(self.dealer_hand) <= 16:
                         self.hit(self.dealer_hand)
