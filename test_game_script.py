@@ -40,6 +40,11 @@ class TestBlackJackGame(unittest.TestCase):
         hand_total = self.game.calculate_hand_total(hand)
         self.assertEqual(hand_total, 19)
 
+    def test_evaluate_initial_hand_total(self):
+        self.game.player_hand = [2, 'J', 5]
+        self.game.dealer_hand = [9]
+        self.game.evaluate_initial_hand_total()
+
 
 if __name__ == '__main__':
     unittest.main()
