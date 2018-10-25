@@ -8,8 +8,12 @@ class TestBlackJackGame(unittest.TestCase):
         self.game = BlackJack()
 
     def test_select_card(self):
+        deck = self.game.deck.copy()
         selected_card = self.game.select_card()
-        self.assertIn(selected_card, self.game.deck)
+        # assert the deck contains the selected card
+        self.assertIn(selected_card, deck)
+        # assert the selected card is the last card in the deck
+        self.assertEqual(selected_card, deck[-1])
 
     def test_deal_card(self):
         hand = []
