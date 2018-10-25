@@ -8,6 +8,8 @@ class BlackJack(object):
     def __init__(self):
         # deck of 52 cards
         self.deck = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 'T', 'J', 'Q', 'K'] * 4
+        self.game_choices = {'h': 'Hit', 's': 'Stand', 'q': 'Quit'}
+        self.blackjack_value = 21
         self.player_hand = []
         self.dealer_hand = []
 
