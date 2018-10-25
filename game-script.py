@@ -22,7 +22,7 @@ class BlackJack(object):
         Select a card from the top of deck of cards
         '''
         return self.deck.pop()
-        
+
     def deal_cards(self, hand, num_of_cards):
         '''
         Deal card(s)
@@ -36,6 +36,7 @@ class BlackJack(object):
             if card in ['T', 'J', 'Q', 'K']:
                 card = 10
             elif card == 'A':
+                # prevent going bust if hand_total is greater than 11
                 if hand_total > 11:
                     card = 1
                 else:
@@ -51,13 +52,19 @@ class BlackJack(object):
         '''
         player_hand_total = self.calculate_hand_total(self.player_hand)
 
-        print (f'Your hand contains {self.player_hand} with a total of '
-               f'{player_hand_total}')
+        print(f'Your hand contains {self.player_hand} with a total of '
+              f'{player_hand_total}')
 
         print(f'Dealer"s face up card is {self.dealer_hand[0]}')
 
-        if player_hand_total == 21:
-            print('Congratulations! You are the winner courtesy of your natural blackjack')
+        blackjack_value = 21
+        if player_hand_total >= blackjack_value:
+            if player_hand_total == blackjack_value:
+                print('Congratulations! You have a blackjack. '
+                      'You win.')
+            elif player_hand_total > blackjack_value:
+                print('Your hand total is greater than 21. You lose!')
+            exit()
 
     def play_game(self):
         print(
@@ -83,7 +90,8 @@ class BlackJack(object):
         game_choice = None
         while game_choice != 'None':
             game_choice = input(
-                'Type h to Hit, s to Stand or q to Quit and press Enter button: '
+                'Type h to Hit, s to Stand or q '
+                'to Quit and press Enter button: '
             ).lower()
             if game_choice == '':
                 continue
@@ -97,9 +105,10 @@ class BlackJack(object):
                     print('Quit game')
                     exit()
             else:
-                print(f'The entered value: {game_choice} is not an acceptable value.')
+                print(f'The entered value: {game_choice} '
+                      'is not an acceptable value.')
+
 
 if __name__ == "__main__":
     blackjack = BlackJack()
     blackjack.play_game()
-            
