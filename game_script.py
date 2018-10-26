@@ -30,6 +30,7 @@ class BlackJack(object):
         '''
         Shuffle deck of cards
         '''
+        print('Dealer shuffles card')
         random.shuffle(self.deck)
 
     def select_card(self):
