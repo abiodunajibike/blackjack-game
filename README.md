@@ -12,7 +12,7 @@ This game requires `python3.x`.
 * If you are dealt a  total of 21 cards at the inital round, you have a Blackjack.
 
 ## How to play game
-Enter `python3 game_script.py` in your terminal/
+Enter `python3 game_script.py` in your terminal.
 
 * You can choose to Hit by pressing 'h' on your keyboard, if you are not
 satisfied with the two initial card dealt for you or Stand by pressing 's' and
