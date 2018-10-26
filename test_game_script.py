@@ -52,6 +52,12 @@ class TestBlackJackGame(unittest.TestCase):
             self.game.stand()
         self.assertEqual(len(self.game.dealer_hand), 4)
 
+    def test_hit(self):
+        hand = []
+        self.game.hit(hand)
+        self.assertEqual(len(hand), 1)
+        self.assertEqual(len(self.game.deck), 51)
+
 
 if __name__ == '__main__':
     unittest.main()
