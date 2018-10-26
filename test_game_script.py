@@ -7,6 +7,12 @@ class TestBlackJackGame(unittest.TestCase):
     def setUp(self):
         self.game = BlackJack()
 
+    def test_shuffle_deck(self):
+        before_shuffle_deck = self.game.deck.copy()
+        self.game.shuffle_deck()
+        after_shuffle_deck = self.game.deck
+        self.assertNotEqual(before_shuffle_deck, after_shuffle_deck)
+
     def test_select_card(self):
         deck = self.game.deck.copy()
         selected_card = self.game.select_card()
