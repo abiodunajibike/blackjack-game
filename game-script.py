@@ -100,7 +100,6 @@ class BlackJack(object):
         exit()
 
     def stand(self):
-        # player_hand_total = self.calculate_hand_total(self.player_hand)
         dealer_hand_total = self.calculate_hand_total(self.dealer_hand)
 
         if dealer_hand_total <= 16:
