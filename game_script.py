@@ -14,6 +14,12 @@ class BlackJack(object):
         self.dealer_hand = []
         self.win = False
 
+    def get_input(self, display_text):
+        return str(input(display_text).lower())
+
+    def is_user_input_valid(self, user_input):
+        return user_input in list(self.game_choices.keys())
+
     def you_win(self):
         self.win = True
 
@@ -147,24 +153,23 @@ class BlackJack(object):
         # evaluate initial cards to see if there is a winner
         self.evaluate_initial_hand_total()
 
-        game_choice = None
-        while game_choice != 'None':
-            print('--------------------------------------------------------------')
-            game_choice = input(
+        user_input = None
+        while user_input != 'None':
+            print('---------------------------------------------------------')
+            user_input = self.get_input(
                 'Type h to Hit, s to Stand or q '
                 'to Quit and press Enter button: '
-            ).lower()
-
-            if game_choice == '':
+            )
+            if user_input == '':
                 continue
 
-            if game_choice in list(self.game_choices.keys()):
+            if self.is_user_input_valid(user_input):
                 print(
-                    f'You have chosen to {self.game_choices[game_choice]}\n'
+                    f'You have chosen to {self.game_choices[user_input]}\n'
                     '--------------------------------------'
                 )
 
-                if game_choice == 'h':
+                if user_input == 'h':
                     self.hit(self.player_hand)
                     player_total = self.calculate_hand_total(self.player_hand)
                     if player_total > 21:
@@ -175,7 +180,7 @@ class BlackJack(object):
                     while self.calculate_hand_total(self.dealer_hand) <= 16:
                         self.hit(self.dealer_hand)
                     self.evaluate_hand_totals()
-                elif game_choice == 's':
+                elif user_input == 's':
                     # dealer must hit on 16 and lower cards
                     while self.calculate_hand_total(self.dealer_hand) <= 16:
                         self.hit(self.dealer_hand)
@@ -184,7 +189,7 @@ class BlackJack(object):
                     print('Quit game')
                     exit()
             else:
-                print(f'The entered value: {game_choice} '
+                print(f'The entered value: {user_input} '
                       'is not a valid choice.')
 
 

@@ -1,8 +1,9 @@
-import unittest
+from unittest.mock import patch
+from unittest import main, TestCase
 from game_script import BlackJack
 
 
-class TestBlackJackGame(unittest.TestCase):
+class TestBlackJackGame(TestCase):
 
     def setUp(self):
         self.game = BlackJack()
@@ -80,6 +81,35 @@ class TestBlackJackGame(unittest.TestCase):
         self.assertEqual(len(hand), 1)
         self.assertEqual(len(self.game.deck), 51)
 
+    def test_is_user_input_valid_with_valid_input(self):
+        self.assertTrue(
+            self.game.is_user_input_valid(
+                list(self.game.game_choices.keys())[0]
+            )
+        )
+
+    def test_is_user_input_valid_with_invalid_input(self):
+        self.assertFalse(
+            self.game.is_user_input_valid(
+                'd'
+            )
+        )
+
+    @patch('game_script.BlackJack.get_input', return_value='h')
+    def test_play_game_with_hit(self, input):
+        with self.assertRaises(SystemExit):
+            self.game.play_game()
+
+    @patch('game_script.BlackJack.get_input', return_value='s')
+    def test_play_game_with_stand(self, input):
+        with self.assertRaises(SystemExit):
+            self.game.play_game()
+
+    @patch('game_script.BlackJack.get_input', return_value='q')
+    def test_play_game_with_quit(self, input):
+        with self.assertRaises(SystemExit):
+            self.game.play_game()
+
 
 if __name__ == '__main__':
-    unittest.main()
+    main()
