@@ -46,12 +46,26 @@ class TestBlackJackGame(unittest.TestCase):
         hand_total = self.game.calculate_hand_total(hand)
         self.assertEqual(hand_total, 19)
 
-    def test_evaluate_initial_hand_total(self):
-        self.game.player_hand = [8, 'J', 3]
+    def test_player_wins_with_evaluate_initial_hand_total(self):
+        self.game.player_hand = [8, 'J', 3]  # ==> 21
         self.game.dealer_hand = [9]
         with self.assertRaises(SystemExit):
             self.game.evaluate_initial_hand_total()
         self.assertTrue(self.game.win)
+
+    def test_player_wins_with_evaluate_hand_totals(self):
+        self.game.player_hand = [8, 'J']  # ==> 18
+        self.game.dealer_hand = [7, 'Q']  # ==> 17
+        with self.assertRaises(SystemExit):
+            self.game.evaluate_hand_totals()
+        self.assertTrue(self.game.win)
+
+    def test_player_loses_with_evaluate_hand_totals(self):
+        self.game.player_hand = [8, 'J']  # ==> 18
+        self.game.dealer_hand = [2, 9, 'Q']  # ==> 21
+        with self.assertRaises(SystemExit):
+            self.game.evaluate_hand_totals()
+        self.assertFalse(self.game.win)
 
     def test_stand(self):
         self.game.dealer_hand = [2, 4, 5]
