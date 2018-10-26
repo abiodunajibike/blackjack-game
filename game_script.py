@@ -12,6 +12,13 @@ class BlackJack(object):
         self.blackjack_value = 21
         self.player_hand = []
         self.dealer_hand = []
+        self.win = False
+
+    def you_win(self):
+        self.win = True
+
+    def you_lose(self):
+        self.win = False
 
     def shuffle_deck(self):
         '''
@@ -65,8 +72,10 @@ class BlackJack(object):
 
         if player_hand_total >= self.blackjack_value:
             if player_hand_total == self.blackjack_value:
+                self.you_win()
                 print('Congratulations! You win. You have a blackjack.')
             elif player_hand_total > self.blackjack_value:
+                self.you_lose()
                 print('You lose! Your hand total is greater than 21.')
             exit()
 
@@ -84,23 +93,28 @@ class BlackJack(object):
               f'{dealer_hand_total}')
 
         if player_hand_total == self.blackjack_value:
+            self.you_win()
             print('You win! You have a blackjack.')
         elif player_hand_total > self.blackjack_value:
+            self.you_lose()
             print('You lose! Your hand total exceeds 21.')
         elif dealer_hand_total == self.blackjack_value:
+            self.you_lose()
             print('You lose! Dealer has a blackjack.')
         elif dealer_hand_total > self.blackjack_value:
+            self.you_win()
             print('Your win! Dealer hand total exceeds 21')
         elif player_hand_total > dealer_hand_total:
+            self.you_win()
             print(f'Your win! Your hand total ({player_hand_total}) '
                   f'is greater than that of the dealer ({dealer_hand_total})')
         elif dealer_hand_total > player_hand_total:
+            self.you_lose()
             print(f'Your lose! Your hand total ({player_hand_total}) '
                   f'is less than that of the dealer ({dealer_hand_total})')
         exit()
 
     def stand(self):
-        # player_hand_total = self.calculate_hand_total(self.player_hand)
         dealer_hand_total = self.calculate_hand_total(self.dealer_hand)
 
         if dealer_hand_total <= 16:

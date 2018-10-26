@@ -51,6 +51,7 @@ class TestBlackJackGame(unittest.TestCase):
         self.game.dealer_hand = [9]
         with self.assertRaises(SystemExit):
             self.game.evaluate_initial_hand_total()
+        self.assertTrue(self.game.win)
 
     def test_stand(self):
         self.game.dealer_hand = [2, 4, 5]
