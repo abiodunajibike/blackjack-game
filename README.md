@@ -27,3 +27,4 @@ To run the tests, enter `python3 test_game_script.py` in your terminal.
 * Make a Blackjack base class with common methods and inherit from this base class to create variations of the game with different rules.
 * Add ability to place a stake or bet on a hand.
 * Implement doubling, splitting and insurance.
+* Add code coverage using `coverage` python library.
