@@ -10,6 +10,7 @@ class BlackJack(object):
         self.deck = ['A', 2, 3, 4, 5, 6, 7, 8, 9, 'T', 'J', 'Q', 'K'] * 4
         self.game_choices = {'h': 'Hit', 's': 'Stand', 'q': 'Quit'}
         self.blackjack_value = 21
+        self.dealer_lowest_hand = 16
         self.player_hand = []
         self.dealer_hand = []
         self.win = False
@@ -124,7 +125,7 @@ class BlackJack(object):
     def stand(self):
         dealer_hand_total = self.calculate_hand_total(self.dealer_hand)
 
-        if dealer_hand_total <= 16:
+        if dealer_hand_total <= self.dealer_lowest_hand:
             self.hit(self.dealer_hand)
 
         self.evaluate_hand_totals()
@@ -173,17 +174,19 @@ class BlackJack(object):
                 if user_input == 'h':
                     self.hit(self.player_hand)
                     player_total = self.calculate_hand_total(self.player_hand)
-                    if player_total > 21:
+                    if player_total > self.blackjack_value:
                         print('You lose! Hand total exceeds 21.')
                         exit()
 
                     # dealer must hit on 16 and lower cards
-                    while self.calculate_hand_total(self.dealer_hand) <= 16:
+                    while self.calculate_hand_total(
+                            self.dealer_hand) <= self.dealer_lowest_hand:
                         self.hit(self.dealer_hand)
                     self.evaluate_hand_totals()
                 elif user_input == 's':
                     # dealer must hit on 16 and lower cards
-                    while self.calculate_hand_total(self.dealer_hand) <= 16:
+                    while self.calculate_hand_total(
+                            self.dealer_hand) <= self.dealer_lowest_hand:
                         self.hit(self.dealer_hand)
                     self.evaluate_hand_totals()
                 else:
