@@ -1,5 +1,4 @@
-from unittest.mock import patch
-from unittest import main, TestCase
+from unittest import main, mock, TestCase
 from game_script import BlackJack
 
 
@@ -95,17 +94,17 @@ class TestBlackJackGame(TestCase):
             )
         )
 
-    @patch('game_script.BlackJack.get_input', return_value='h')
+    @mock.patch('game_script.BlackJack.get_input', return_value='h')
     def test_play_game_with_hit(self, input):
         with self.assertRaises(SystemExit):
             self.game.play_game()
 
-    @patch('game_script.BlackJack.get_input', return_value='s')
+    @mock.patch('game_script.BlackJack.get_input', return_value='s')
     def test_play_game_with_stand(self, input):
         with self.assertRaises(SystemExit):
             self.game.play_game()
 
-    @patch('game_script.BlackJack.get_input', return_value='q')
+    @mock.patch('game_script.BlackJack.get_input', return_value='q')
     def test_play_game_with_quit(self, input):
         with self.assertRaises(SystemExit):
             self.game.play_game()
